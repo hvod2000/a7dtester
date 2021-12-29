@@ -16,12 +16,12 @@ def test_using_tester_dir(tester_dir, context=None):
         result = subprocess.run(test_dir/'test', cwd=test_dir).returncode
     return result
 
-def check_all_tests(tests_dir, context=None, log=lambda x: print(x)):
-    tests = [(Archive(p), p.name) for p in Path(tests_dir).iterdir()]
+def check_all_tests(tests, context=None, log=lambda x: print(x)):
     results = [0, 0]
+    tests = list(Archive(tests).iterdir())
     if context is not None and not isinstance(context, Archive):
         context = Archive(context)
-    for i, (test, name) in enumerate(tests):
+    for i, (name, test) in enumerate(tests):
         n = i + 1
         log(f'[{n}/{len(tests)}] {name}')
         result = test_using_tester_dir(test, context)
