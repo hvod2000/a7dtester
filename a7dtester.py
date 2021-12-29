@@ -1,3 +1,4 @@
+import sys
 import shutil
 import subprocess
 import random
@@ -24,3 +25,12 @@ def check_all_tests(tests_dir, log=lambda x: print(x)):
         result = 'ok' if result == 0 else f'FAIL({result})'
         log(f'[{n}/{len(tests)}] -> {result}')
     return tuple(results)
+
+def main():
+    ok, fails = check_all_tests(sys.argv[1] if len(sys.argv) > 1 else 'tests')
+    print(f'ok: {ok}')
+    print(f'fails: {fails}')
+    print(f'{100*ok/(fails + ok):0.4}% passed')
+
+if __name__ == '__main__':
+    main()
