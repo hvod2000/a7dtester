@@ -12,3 +12,15 @@ def test_using_tester_dir(tester_dir):
     result = subprocess.run(test_dir/'test').returncode
     shutil.rmtree(test_dir)
     return result
+
+def check_all_tests(tests_dir, log=lambda x: print(x)):
+    tests = [(Archive(p), p.name) for p in Path(tests_dir).iterdir()]
+    results = [0, 0]
+    for i, (test, name) in enumerate(tests):
+        n = i + 1
+        log(f'[{n}/{len(tests)}] {name}')
+        result = test_using_tester_dir(test)
+        results[result != 0] += 1
+        result = 'ok' if result == 0 else f'FAIL({result})'
+        log(f'[{n}/{len(tests)}] -> {result}')
+    return tuple(results)
