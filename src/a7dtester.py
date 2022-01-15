@@ -31,7 +31,13 @@ def check_all_tests(tests, context=None, log=lambda x: print(x)):
     return tuple(results)
 
 def main():
-    tests = sys.argv[1] if len(sys.argv) > 1 else 'tests'
+    srcs = sys.argv[1:] or ['tests', 'tests.a7d', 'TESTS']
+    for tests in map(Path, srcs):
+        if (tests.is_dir() or tests.is_file()):
+            break
+    else:
+        raise Exception('"tests" directory is not found')
+        return
     ok, fails = check_all_tests(tests, '.')
     print(f'ok: {ok}')
     print(f'fails: {fails}')
