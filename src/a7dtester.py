@@ -34,7 +34,7 @@ def check_all_tests(tests, context=None, log=lambda x: print(x)):
 
 
 def main():
-    srcs = sys.argv[1:] or ["tests", "tests.a7d", "TESTS"]
+    srcs = sys.argv[1:] or ["tests", "tests.a7d", "TESTS", "TESTS.a7d"]
     for tests in map(Path, srcs):
         if tests.is_dir() or tests.is_file():
             break
