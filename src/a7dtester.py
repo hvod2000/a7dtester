@@ -39,9 +39,11 @@ def main():
         raise Exception('"tests" directory is not found')
         return
     ok, fails = check_all_tests(tests, '.')
+    total = ok + fails
+    success_rate = ok / total if total else 1.0
     print(f'ok: {ok}')
     print(f'fails: {fails}')
-    print(f'{100*ok/(fails + ok):0.4}% passed')
+    print(f'{100*success_rate:0.4}% passed')
 
 if __name__ == '__main__':
     main()
