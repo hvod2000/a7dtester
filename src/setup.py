@@ -5,7 +5,7 @@ with open("../readme.md", "r") as f:
 
 setuptools.setup(
     name="a7dtester",
-    version="0.0.3",
+    version="0.0.4",
     author="Uladzislau Khamkou",
     description="simple test runner",
     long_description=long_description,
