@@ -1,9 +1,10 @@
-import sys
-import subprocess
 import random
+import subprocess
+import sys
 import tempfile
-from a7d import Archive
 from pathlib import Path
+
+from a7d import Archive
 
 
 def test_using_tester_dir(tester_dir, context=None):
